@@ -19,3 +19,32 @@ const solution = forwardSum*difference
 console.log("Forward Sum: " + forwardSum)
 console.log("Difference: " + difference)
 console.log("Solution: " + solution)
+
+// Part 2 - Credit @iB1Jimbob
+// Run this part in a seperate file don't run part 1 and 2 at same time they both are different
+const fs = require('fs');
+let input = fs.readFileSync('./input.txt','utf8');
+input = input.split('\n');
+for (let i = 0;i<input.length;i++) {
+    input[i] = input[i].split(' ')
+    let amnt = input[i][1];
+    input[i][1] = parseFloat(amnt)
+}
+let horizontal = 0;
+let depth = 0;
+let aim = 0;
+for (let j = 0;j<input.length;j++) {
+    let command = input[j][0];
+    let amnt = input[j][1];
+    if (command === 'forward') {
+        horizontal += amnt;
+        depth += aim * amnt;
+    }else if (command === 'down') {
+        aim += amnt;
+    }else if (command === 'up') {
+        aim -= amnt;
+    }else{
+        console.log('Error!')
+    }
+}
+console.log(horizontal * depth);
